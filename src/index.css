@@ -2,15 +2,22 @@
   color: #fff;
   background: #ff0000;
   padding: 25px;
+
+  h1 {
+    cursor: pointer;
+  }
 }
 
 .main {
   padding: 25px;
 }
 
+/* ---------- CARD ---------- */
+
 .card {
   width: 20rem;
   border: solid 0.3rem #ff0000;
+  cursor: pointer;
 
   .card-title {
     font-size: 2rem;
