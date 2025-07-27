@@ -1,0 +1,33 @@
+.header {
+  color: #fff;
+  background: #ff0000;
+  padding: 25px;
+}
+
+.main {
+  padding: 25px;
+}
+
+.card {
+  width: 20rem;
+  border: solid 0.3rem #ff0000;
+
+  .card-title {
+    font-size: 2rem;
+  }
+
+  .card-body {
+    color: #fff;
+    background: #ff0000;
+
+    .card-heart {
+      color: #fff;
+      display: flex;
+      justify-content: end;
+    }
+  }
+
+  .card-image {
+    padding: 1.5rem;
+  }
+}

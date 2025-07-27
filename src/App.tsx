@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
-import { getAllPokemons, getPokemonDetails } from './api';
+// import { getAllPokemons, getPokemonDetails } from './api';
 import './App.css';
 import type { PokemosDetails } from './types';
+import { PokemonCard } from './components/Card';
+import { dummyPokemonList } from './data';
 
 function App() {
   const [pokemonList, setPokemonList] = useState<PokemosDetails[]>([]);
@@ -9,12 +11,12 @@ function App() {
   useEffect(() => {
     const getPokemonList = async () => {
       try {
-        const response = await getAllPokemons();
-        const pokemons = await Promise.all(
-          response.results.map((pokemon) => getPokemonDetails(pokemon.url))
-        );
+        // const response = await getAllPokemons();
+        // const pokemons = await Promise.all(
+        //   response.results.map((pokemon) => getPokemonDetails(pokemon.url))
+        // );
 
-        setPokemonList(pokemons);
+        setPokemonList(dummyPokemonList);
       } catch (error) {
         console.log(error);
       }
@@ -25,15 +27,16 @@ function App() {
 
   return (
     <>
-      <header>
+      <header className="header">
         <h1>Pokedex</h1>
       </header>
-      <main>
+      <main className="main">
         {pokemonList?.map((pokemon: PokemosDetails) => (
-          <div key={pokemon.name}>
-            <img src={pokemon.sprites.other.dream_world.front_default} />
-            <p>{pokemon.name}</p>
-          </div>
+          <PokemonCard
+            key={pokemon.name}
+            name={pokemon.name}
+            image={pokemon.sprites.other.dream_world.front_default}
+          />
         ))}
       </main>
     </>
