@@ -1,16 +1,20 @@
-import { useEffect, useState } from "react";
-import { getAllPokemons } from "./api";
-import "./App.css";
-import type { PokemonItem, PokemonList } from "./types";
+import { useEffect, useState } from 'react';
+import { getAllPokemons, getPokemonDetails } from './api';
+import './App.css';
+import type { PokemosDetails } from './types';
 
 function App() {
-  const [pokemonList, setPokemonList] = useState<PokemonList>();
+  const [pokemonList, setPokemonList] = useState<PokemosDetails[]>([]);
 
   useEffect(() => {
     const getPokemonList = async () => {
       try {
         const response = await getAllPokemons();
-        setPokemonList(response);
+        const pokemons = await Promise.all(
+          response.results.map((pokemon) => getPokemonDetails(pokemon.url))
+        );
+
+        setPokemonList(pokemons);
       } catch (error) {
         console.log(error);
       }
@@ -25,10 +29,10 @@ function App() {
         <h1>Pokedex</h1>
       </header>
       <main>
-        {pokemonList?.results?.map((pokemon: PokemonItem) => (
+        {pokemonList?.map((pokemon: PokemosDetails) => (
           <div key={pokemon.name}>
+            <img src={pokemon.sprites.other.dream_world.front_default} />
             <p>{pokemon.name}</p>
-            <p>{pokemon.url}</p>
           </div>
         ))}
       </main>
