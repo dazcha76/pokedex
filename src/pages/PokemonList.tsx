@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PokemonCard } from '../components/Card';
 import type { PokemosDetails } from '../types';
+// import { getAllPokemons, getPokemonDetails } from '../api';
 import { dummyPokemonList } from '../data';
 
 export const PokemonList = () => {
@@ -20,7 +21,7 @@ export const PokemonList = () => {
         // const pokemons = await Promise.all(
         //   response.results.map((pokemon) => getPokemonDetails(pokemon.url))
         // );
-
+        // setPokemonList(pokemons);
         setPokemonList(dummyPokemonList);
       } catch (error) {
         console.log(error);

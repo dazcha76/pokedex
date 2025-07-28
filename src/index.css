@@ -10,12 +10,15 @@
 
 .main {
   padding: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
 }
 
 /* ---------- CARD ---------- */
 
 .card {
-  width: 20rem;
+  border-radius: 15px;
   border: solid 0.3rem #ff0000;
   cursor: pointer;
 
@@ -26,15 +29,24 @@
   .card-body {
     color: #fff;
     background: #ff0000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
     .card-heart {
       color: #fff;
-      display: flex;
-      justify-content: end;
     }
   }
 
   .card-image {
     padding: 1.5rem;
+    width: 350px;
+    height: 350px;
   }
+}
+
+/* ---------- STATS / PROGRESS BAR ---------- */
+
+.stat-row {
+  align-items: center;
 }
