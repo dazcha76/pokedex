@@ -19,7 +19,7 @@ export const PokemonList = () => {
       try {
         // const response = await getAllPokemons();
         // const pokemons = await Promise.all(
-        //   response.results.map((pokemon) => getPokemonDetails(pokemon.url))
+        //   response.results.map((pokemon) => getPokemonDetails(pokemon.name))
         // );
         // setPokemonList(pokemons);
         setPokemonList(dummyPokemonList);

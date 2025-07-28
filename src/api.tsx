@@ -9,8 +9,10 @@ export const getAllPokemons = async (): Promise<PokemonList> => {
 };
 
 export const getPokemonDetails = async (
-  url: string
+  name: string
 ): Promise<PokemosDetails> => {
-  const { data } = await axios.get<PokemosDetails>(url);
+  const { data } = await axios.get<PokemosDetails>(
+    `https://pokeapi.co/api/v2/pokemon/${name}`
+  );
   return data;
 };

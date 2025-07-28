@@ -23,19 +23,12 @@
   cursor: pointer;
 
   .card-title {
-    font-size: 2rem;
+    font-size: 3rem;
   }
 
   .card-body {
-    color: #fff;
-    background: #ff0000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .card-heart {
-      color: #fff;
-    }
+    color: #ff0000;
+    text-align: center;
   }
 
   .card-image {
@@ -45,8 +38,12 @@
   }
 }
 
-/* ---------- STATS / PROGRESS BAR ---------- */
+/* ---------- DETAILS PAGE ---------- */
 
 .stat-row {
   align-items: center;
+}
+
+.card-heart {
+  color: #ff0000;
 }

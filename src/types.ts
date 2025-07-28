@@ -11,31 +11,46 @@ export type PokemonItem = {
 
 export type PokemosDetails = {
   // abilities: [];
-  // base_experience: number;
+  base_experience: number;
   // cries: {};
   // forms: [];
   // game_indices: [];
-  // height: number;
+  height: number;
   // held_items: [];
-  // id: 1;
-  // is_default: true;
-  // location_area_encounters: string;
+  id: number;
+  is_default: boolean;
+  location_area_encounters: string;
   // moves: [];
   name: string;
-  // order: 1;
+  order: number;
   // past_abilities: [];
   // past_types: [];
   // species: {};
   sprites: Sprites;
-  // stats: [];
+  stats: Stats[];
   // types: [];
-  // weight: number;
+  weight: number;
 };
 
 type Sprites = {
-  other: {
-    dream_world: {
-      front_default: string;
-    };
-  };
+  other: OtherSprites;
 };
+
+interface OtherSprites {
+  dream_world: DreamWorldSprite;
+}
+
+interface DreamWorldSprite {
+  front_default: string;
+}
+
+interface Stats {
+  base_stat: number;
+  effort: number;
+  stat: StatInfo;
+}
+
+interface StatInfo {
+  name: string;
+  url: string;
+}

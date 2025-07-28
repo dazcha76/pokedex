@@ -7,7 +7,7 @@
 //     id // 4 digits, add 0s as needed i.e. id: 1 = 0001
 // 4.  Types
 //     types --> type --> name  // 1 or 2 types
-// 5.  Base Stats
+// 5.  Base Stats ✅
 //     stats --> base_stat
 //     stats --> stat --> name
 // 6.  Abilities

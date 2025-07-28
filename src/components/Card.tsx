@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
-import { FaRegHeart } from 'react-icons/fa';
 
 type CardProps = {
   name: string;
@@ -11,7 +10,7 @@ export const PokemonCard = ({ name, image }: CardProps) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/details');
+    navigate(`/${name}`);
   };
 
   return (
@@ -19,9 +18,6 @@ export const PokemonCard = ({ name, image }: CardProps) => {
       <Card.Img className="card-image" variant="top" src={image} />
       <Card.Body className="card-body">
         <Card.Title className="card-title">{name}</Card.Title>
-        <div className="card-heart">
-          <FaRegHeart size={32} />
-        </div>
       </Card.Body>
     </Card>
   );

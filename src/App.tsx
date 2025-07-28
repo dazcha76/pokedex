@@ -5,7 +5,7 @@ import { PokemonDetails } from './pages/PokemonDetails';
 
 const router = createBrowserRouter([
   { path: '/', element: <PokemonList /> },
-  { path: '/details', element: <PokemonDetails /> },
+  { path: '/:name', element: <PokemonDetails /> },
 ]);
 
 function App() {
