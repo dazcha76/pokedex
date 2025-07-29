@@ -1,4 +1,4 @@
-export type PokemonList = {
+export type PokemonResponse = {
   next: string | null;
   previous: string | null;
   results: PokemonItem[];

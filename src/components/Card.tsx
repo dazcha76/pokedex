@@ -11,12 +11,12 @@ type CardProps = {
 export const InfoCard = ({ title, image, body, style }: CardProps) => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleCardClick = () => {
     navigate(`/${title}`);
   };
 
   return (
-    <Card className="card" style={style} onClick={handleClick}>
+    <Card className="card" style={style} onClick={handleCardClick}>
       {image && (
         <Card.Img
           className="card-image"

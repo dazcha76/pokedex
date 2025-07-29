@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { InfoCard } from '../components/Card';
-import type { PokemosDetails } from '../types';
-import { dummyPokemonList } from '../data';
+import type { PokemonResponse, PokemosDetails } from '../types';
+import { PaginationComponent } from '../components/Pagination';
 // import { getAllPokemons, getPokemonDetails } from '../api';
-// import { dummyPokemonList } from '../data';
+import { dummyPokemonResponse, dummyPokemonList } from '../data';
 
 export const PokemonList = () => {
-  const [pokemonList, setPokemonList] = useState<PokemosDetails[]>([]);
+  const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon');
+  const [pokemonResponse, setPokemonResponse] = useState<PokemonResponse>();
+  const [pokemonDetails, setPokemonDetails] = useState<PokemosDetails[]>([]);
 
   const navigate = useNavigate();
 
@@ -15,22 +17,42 @@ export const PokemonList = () => {
     navigate('/');
   };
 
+  const handlePageChange = (page: string) => {
+    let newUrl = '';
+
+    if (page !== 'previous' && page !== 'next') {
+      newUrl = `https://pokeapi.co/api/v2/pokemon?offset=${
+        +page * 20 - 20
+      }&limit=20`;
+    } else if (page === 'previous' && pokemonResponse?.previous) {
+      newUrl = pokemonResponse.previous;
+    } else if (page === 'next' && pokemonResponse?.next) {
+      newUrl = pokemonResponse.next;
+    }
+
+    if (newUrl && newUrl !== url) {
+      setUrl(newUrl);
+    }
+  };
+
   useEffect(() => {
     const getPokemonList = async () => {
       try {
-        // const response = await getAllPokemons();
+        // const response = await getAllPokemons(url);
+        // setPokemonResponse(response);
         // const pokemons = await Promise.all(
         //   response.results.map((pokemon) => getPokemonDetails(pokemon.name))
         // );
-        // setPokemonList(pokemons);
-        setPokemonList(dummyPokemonList);
+        // setPokemonDetails(pokemons);
+        setPokemonResponse(dummyPokemonResponse);
+        setPokemonDetails(dummyPokemonList);
       } catch (error) {
         console.log(error);
       }
     };
 
     getPokemonList();
-  }, []);
+  }, [url]);
 
   return (
     <>
@@ -39,7 +61,7 @@ export const PokemonList = () => {
       </header>
       <main className="main">
         <div className="board">
-          {pokemonList?.map((pokemon: PokemosDetails) => (
+          {pokemonDetails?.map((pokemon: PokemosDetails) => (
             <InfoCard
               key={pokemon.name}
               title={pokemon.name}
@@ -47,6 +69,7 @@ export const PokemonList = () => {
             />
           ))}
         </div>
+        <PaginationComponent onPageChange={handlePageChange} />
       </main>
     </>
   );

@@ -1,10 +1,8 @@
 import axios from 'axios';
-import type { PokemonList, PokemonSpecies, PokemosDetails } from './types';
+import type { PokemonResponse, PokemonSpecies, PokemosDetails } from './types';
 
-export const getAllPokemons = async (): Promise<PokemonList> => {
-  const { data } = await axios.get<PokemonList>(
-    'https://pokeapi.co/api/v2/pokemon/'
-  );
+export const getAllPokemons = async (url: string): Promise<PokemonResponse> => {
+  const { data } = await axios.get<PokemonResponse>(url);
   return data;
 };
 
