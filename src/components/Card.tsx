@@ -2,22 +2,32 @@ import { useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 
 type CardProps = {
-  name: string;
-  image: string;
+  title?: string;
+  image?: string;
+  body?: React.ReactNode;
+  style?: React.CSSProperties;
 };
 
-export const PokemonCard = ({ name, image }: CardProps) => {
+export const InfoCard = ({ title, image, body, style }: CardProps) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/${name}`);
+    navigate(`/${title}`);
   };
 
   return (
-    <Card className="card" onClick={handleClick}>
-      <Card.Img className="card-image" variant="top" src={image} alt={name} />
-      <Card.Body className="card-body">
-        <Card.Title className="card-title">{name}</Card.Title>
+    <Card className="card" style={style} onClick={handleClick}>
+      {image && (
+        <Card.Img
+          className="card-image"
+          variant="top"
+          src={image}
+          alt={title}
+        />
+      )}
+      <Card.Body>
+        <Card.Title className="card-title">{title}</Card.Title>
+        <Card.Text className="display-flex">{body}</Card.Text>
       </Card.Body>
     </Card>
   );

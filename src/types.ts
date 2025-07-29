@@ -10,27 +10,38 @@ export type PokemonItem = {
 };
 
 export type PokemosDetails = {
-  // abilities: [];
-  base_experience: number;
-  // cries: {};
-  // forms: [];
-  // game_indices: [];
+  abilities: PokemonAbility[];
   height: number;
-  // held_items: [];
   id: number;
-  is_default: boolean;
-  location_area_encounters: string;
-  // moves: [];
   name: string;
-  order: number;
-  // past_abilities: [];
-  // past_types: [];
-  // species: {};
   sprites: Sprites;
   stats: Stats[];
-  // types: [];
+  types: PokemonType[];
   weight: number;
 };
+
+// ------ Ability ------ //
+
+export type PokemonAbility = {
+  ability: AbilityInfo;
+  is_hidden: boolean;
+};
+
+type AbilityInfo = {
+  name: string;
+};
+
+// ------ Species ------ //
+
+export type PokemonSpecies = {
+  flavor_text_entries: FlavorTextEntry[];
+};
+
+export type FlavorTextEntry = {
+  flavor_text: string;
+};
+
+// ------ Sprites ------ //
 
 type Sprites = {
   other: OtherSprites;
@@ -44,6 +55,8 @@ type DreamWorldSprite = {
   front_default: string;
 };
 
+// ------ Stats ------ //
+
 type Stats = {
   base_stat: number;
   effort: number;
@@ -55,10 +68,12 @@ type StatInfo = {
   url: string;
 };
 
-export type PokemonSpecies = {
-  flavor_text_entries: FlavorTextEntry[];
+// ------ Type ------ //
+
+export type PokemonType = {
+  type: TypeInfo;
 };
 
-export type FlavorTextEntry = {
-  flavor_text: string;
+type TypeInfo = {
+  name: string;
 };

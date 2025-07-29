@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PokemonCard } from '../components/Card';
+import { InfoCard } from '../components/Card';
 import type { PokemosDetails } from '../types';
-// import { getAllPokemons, getPokemonDetails } from '../api';
 import { dummyPokemonList } from '../data';
+// import { getAllPokemons, getPokemonDetails } from '../api';
+// import { dummyPokemonList } from '../data';
 
 export const PokemonList = () => {
   const [pokemonList, setPokemonList] = useState<PokemosDetails[]>([]);
@@ -39,9 +40,9 @@ export const PokemonList = () => {
       <main className="main">
         <div className="board">
           {pokemonList?.map((pokemon: PokemosDetails) => (
-            <PokemonCard
+            <InfoCard
               key={pokemon.name}
-              name={pokemon.name}
+              title={pokemon.name}
               image={pokemon.sprites.other.dream_world.front_default}
             />
           ))}

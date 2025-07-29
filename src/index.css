@@ -1,3 +1,15 @@
+html {
+  font-size: 16px;
+}
+
+body {
+  color: #595959;
+}
+
+p {
+  font-size: 2rem;
+}
+
 .header {
   color: #fff;
   background: #ff0000;
@@ -27,12 +39,12 @@
   cursor: pointer;
 
   .card-title {
+    color: #ff0000;
     font-size: 3rem;
   }
 
-  .card-body {
-    color: #ff0000;
-    text-align: center;
+  .card-text {
+    justify-content: start;
   }
 
   .card-image {
@@ -47,23 +59,47 @@
 .display-flex {
   display: flex;
   justify-content: space-between;
+  gap: 5rem;
 }
 
-.name {
+.title {
   color: #ff0000;
-  font-size: 48px;
+  font-size: 3rem;
+}
+
+.sub-title {
+  color: #ff0000;
+  font-size: 2.5rem;
 }
 
 .dexId {
   color: #595959;
-  font-size: 48px;
+  font-size: 3rem;
 }
 
-.stat-row {
-  align-items: center;
+.stats-container {
+  width: 65%;
+
+  .stat-row {
+    align-items: center;
+  }
 }
 
-.heart {
+.red-icon {
   color: #ff0000;
   cursor: pointer;
+}
+
+.hidden-ability {
+  vertical-align: baseline;
+  margin-left: 10px;
+}
+
+.details-card {
+  width: 30%;
+}
+
+.stats-progress-bar {
+  height: 2rem;
+  border-radius: 20px;
 }

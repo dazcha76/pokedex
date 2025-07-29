@@ -1,11 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { StatsProgressBar } from '../components/ProgressBar';
-import { FaRegHeart } from 'react-icons/fa';
+import { FaHeart, FaLock, FaRegHeart } from 'react-icons/fa';
 // import { getPokemonDetails, getSpeciesInfo } from '../api';
-import type { PokemonSpecies, PokemosDetails } from '../types';
+import type {
+  PokemonAbility,
+  PokemonSpecies,
+  PokemonType,
+  PokemosDetails,
+} from '../types';
 import Image from 'react-bootstrap/Image';
 import { poke1, pokemonSpecies } from '../data';
+import { Stack } from 'react-bootstrap';
+import { InfoCard } from '../components/Card';
 
 export const PokemonDetails = () => {
   const [details, setDetails] = useState<PokemosDetails>();
@@ -24,6 +31,30 @@ export const PokemonDetails = () => {
   const handleClick = () => {
     navigate('/');
   };
+
+  const size = (
+    <>
+      <span>Height: {details?.height}</span>
+      <span>Weight: {details?.weight}</span>
+    </>
+  );
+
+  const types = details?.types?.map((type: PokemonType) => (
+    <span key={type.type.name}>{type.type.name}</span>
+  ));
+
+  const abilities = details?.abilities?.map((ability: PokemonAbility) => (
+    <span key={ability.ability.name}>
+      {ability.ability.name}
+      {ability.is_hidden && (
+        <FaLock
+          title="Hidden Ability"
+          size={20}
+          className="red-icon hidden-ability"
+        />
+      )}
+    </span>
+  ));
 
   useEffect(() => {
     const getPokemonInfo = async () => {
@@ -49,35 +80,45 @@ export const PokemonDetails = () => {
         <h1 onClick={handleClick}>Pokedex</h1>
       </header>
       <main className="main">
-        <div className="display-flex">
-          <h1 className="name">{name}</h1>
-          <h1 className="dexId">#000{details?.id}</h1>
-          <div className="heart">
-            <FaRegHeart size={48} />
+        <Stack gap={5}>
+          <div className="display-flex">
+            <h1 className="dexId">#000{details?.id}</h1>
+            <h1 className="title">{details?.name}</h1>
+            <div className="red-icon">
+              <FaRegHeart title="Favorite" size={48} />
+              <FaHeart title="Favorite" size={48} />
+            </div>
           </div>
-        </div>
-        <div className="display-flex">
-          <Image
-            width={800}
-            src={details?.sprites.other.dream_world.front_default}
-            alt={name}
-            rounded
-          />
-          <div>
-            <h1>{species?.flavor_text_entries[0].flavor_text}</h1>
-            <h1>Height: {details?.height}</h1>
-            <h1>Weight: {details?.weight}</h1>
+
+          <div className="display-flex">
+            <Image
+              src={details?.sprites.other.dream_world.front_default}
+              alt={name}
+              rounded
+            />
+            <div className="stats-container">
+              <h1>{species?.flavor_text_entries[0].flavor_text}</h1>
+              <h1 className="sub-title">Stats</h1>
+              {details?.stats.map((stat, index) => (
+                <StatsProgressBar
+                  key={stat.stat.name}
+                  name={stat.stat.name}
+                  base={stat.base_stat}
+                  color={colors[index % colors.length]}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-        <h1>Stats</h1>
-        {details?.stats.map((stat, index) => (
-          <StatsProgressBar
-            key={stat.stat.name}
-            name={stat.stat.name}
-            base={stat.base_stat}
-            color={colors[index % colors.length]}
-          />
-        ))}
+          <div className="display-flex">
+            <InfoCard title="Size" body={size} style={{ width: '30%' }} />
+            <InfoCard title="Type" body={types} style={{ width: '30%' }} />
+            <InfoCard
+              title="Abilities"
+              body={abilities}
+              style={{ width: '30%' }}
+            />
+          </div>
+        </Stack>
       </main>
     </>
   );
