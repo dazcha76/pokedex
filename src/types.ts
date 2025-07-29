@@ -9,6 +9,11 @@ export type PokemonItem = {
   url: string;
 };
 
+export type PokemonFavorites = {
+  name: string;
+  image: string;
+};
+
 export type PokemosDetails = {
   abilities: PokemonAbility[];
   height: number;

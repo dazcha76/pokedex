@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { InfoCard } from '../components/Card';
 import type { PokemonResponse, PokemosDetails } from '../types';
 import { PaginationComponent } from '../components/Pagination';
@@ -10,12 +9,6 @@ export const PokemonList = () => {
   const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon');
   const [pokemonResponse, setPokemonResponse] = useState<PokemonResponse>();
   const [pokemonDetails, setPokemonDetails] = useState<PokemosDetails[]>([]);
-
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate('/');
-  };
 
   const handlePageChange = (page: string) => {
     let newUrl = '';
@@ -59,7 +52,7 @@ export const PokemonList = () => {
   return (
     <>
       <header className="header">
-        <h1 onClick={handleClick}>Pokedex</h1>
+        <h1>Pokedex</h1>
       </header>
       <main className="main">
         <div className="board">

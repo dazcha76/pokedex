@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { StatsProgressBar } from '../components/ProgressBar';
 import { FaHeart, FaLock, FaRegHeart } from 'react-icons/fa';
 // import { getPokemonDetails, getSpeciesInfo } from '../api';
@@ -21,7 +21,6 @@ export const PokemonDetails = () => {
     []
   );
 
-  const navigate = useNavigate();
   const { name } = useParams();
   const colors = [
     'primary',
@@ -55,10 +54,6 @@ export const PokemonDetails = () => {
       )}
     </span>
   ));
-
-  const handleClick = () => {
-    navigate('/');
-  };
 
   const toggleLike = () => {
     if (!details) return;
@@ -111,7 +106,7 @@ export const PokemonDetails = () => {
   return (
     <>
       <header className="header">
-        <h1 onClick={handleClick}>Pokedex</h1>
+        <h1>Pokedex</h1>
       </header>
       <main className="main">
         <Stack gap={5}>
