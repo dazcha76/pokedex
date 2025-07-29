@@ -10,6 +10,10 @@
 
 .main {
   padding: 25px;
+  margin: 0 auto;
+}
+
+.board {
   display: flex;
   flex-wrap: wrap;
   gap: 50px;
@@ -40,10 +44,26 @@
 
 /* ---------- DETAILS PAGE ---------- */
 
+.display-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.name {
+  color: #ff0000;
+  font-size: 48px;
+}
+
+.dexId {
+  color: #595959;
+  font-size: 48px;
+}
+
 .stat-row {
   align-items: center;
 }
 
-.card-heart {
+.heart {
   color: #ff0000;
+  cursor: pointer;
 }

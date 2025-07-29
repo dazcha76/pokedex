@@ -15,7 +15,7 @@ export const PokemonCard = ({ name, image }: CardProps) => {
 
   return (
     <Card className="card" onClick={handleClick}>
-      <Card.Img className="card-image" variant="top" src={image} />
+      <Card.Img className="card-image" variant="top" src={image} alt={name} />
       <Card.Body className="card-body">
         <Card.Title className="card-title">{name}</Card.Title>
       </Card.Body>

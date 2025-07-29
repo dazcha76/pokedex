@@ -36,21 +36,29 @@ type Sprites = {
   other: OtherSprites;
 };
 
-interface OtherSprites {
+type OtherSprites = {
   dream_world: DreamWorldSprite;
-}
+};
 
-interface DreamWorldSprite {
+type DreamWorldSprite = {
   front_default: string;
-}
+};
 
-interface Stats {
+type Stats = {
   base_stat: number;
   effort: number;
   stat: StatInfo;
-}
+};
 
-interface StatInfo {
+type StatInfo = {
   name: string;
   url: string;
-}
+};
+
+export type PokemonSpecies = {
+  flavor_text_entries: FlavorTextEntry[];
+};
+
+export type FlavorTextEntry = {
+  flavor_text: string;
+};

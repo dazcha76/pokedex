@@ -14,7 +14,7 @@ export const StatsProgressBar = ({ name, base, color }: ProgressBarProps) => {
           <h3>{name}</h3>
         </Col>
         <Col>
-          <ProgressBar variant={color} now={base} />
+          <ProgressBar variant={color} now={base} label={base} />
         </Col>
       </Row>
     </Container>

@@ -37,13 +37,15 @@ export const PokemonList = () => {
         <h1 onClick={handleClick}>Pokedex</h1>
       </header>
       <main className="main">
-        {pokemonList?.map((pokemon: PokemosDetails) => (
-          <PokemonCard
-            key={pokemon.name}
-            name={pokemon.name}
-            image={pokemon.sprites.other.dream_world.front_default}
-          />
-        ))}
+        <div className="board">
+          {pokemonList?.map((pokemon: PokemosDetails) => (
+            <PokemonCard
+              key={pokemon.name}
+              name={pokemon.name}
+              image={pokemon.sprites.other.dream_world.front_default}
+            />
+          ))}
+        </div>
       </main>
     </>
   );
