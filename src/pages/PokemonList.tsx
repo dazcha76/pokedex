@@ -4,6 +4,7 @@ import type { PokemonResponse, PokemosDetails } from '../types';
 import { PaginationComponent } from '../components/Pagination';
 // import { getAllPokemons, getPokemonDetails } from '../api';
 import { dummyPokemonResponse, dummyPokemonList } from '../data';
+import { NavBar } from '../components/Navigation';
 
 export const PokemonList = () => {
   const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon');
@@ -50,22 +51,18 @@ export const PokemonList = () => {
   }, [url]);
 
   return (
-    <>
-      <header className="header">
-        <h1>Pokedex</h1>
-      </header>
-      <main className="main">
-        <div className="board">
-          {pokemonDetails?.map((pokemon: PokemosDetails) => (
-            <InfoCard
-              key={pokemon.name}
-              title={pokemon.name}
-              image={pokemon.sprites.other.dream_world.front_default}
-            />
-          ))}
-        </div>
-        <PaginationComponent onPageChange={handlePageChange} />
-      </main>
-    </>
+    <main>
+      <h1 className="title">Pokedex</h1>
+      <div className="board">
+        {pokemonDetails?.map((pokemon: PokemosDetails) => (
+          <InfoCard
+            key={pokemon.name}
+            title={pokemon.name}
+            image={pokemon.sprites.other.dream_world.front_default}
+          />
+        ))}
+      </div>
+      <PaginationComponent onPageChange={handlePageChange} />
+    </main>
   );
 };

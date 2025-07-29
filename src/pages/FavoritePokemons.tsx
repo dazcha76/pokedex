@@ -20,11 +20,12 @@ export const FavoritePokemons = () => {
   }, []);
 
   return (
-    <>
-      <header className="header">
-        <h1>Pokedex</h1>
-      </header>
-      <main className="main">
+    <main>
+      <h1 className="title">My Favorites</h1>
+
+      {!favoritePokemons.length && <h1>You don't have any favorites.</h1>}
+
+      {favoritePokemons && (
         <div className="board">
           {favoritePokemons?.map((pokemon: PokemonFavorites) => (
             <InfoCard
@@ -34,7 +35,7 @@ export const FavoritePokemons = () => {
             />
           ))}
         </div>
-      </main>
-    </>
+      )}
+    </main>
   );
 };

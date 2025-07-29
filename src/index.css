@@ -1,28 +1,24 @@
-html {
-  font-size: 16px;
-}
-
 body {
   color: #595959;
 }
 
 p {
-  font-size: 2rem;
+  font-size: 2em;
 }
 
-.header {
-  color: #fff;
-  background: #ff0000;
-  padding: 25px;
-
-  h1 {
-    cursor: pointer;
-  }
+.title {
+  color: #ff0000;
+  font-size: 3em;
+  margin: 1em 0;
 }
 
-.main {
-  padding: 25px;
-  margin: 0 auto;
+.sub-title {
+  color: #ff0000;
+}
+
+.dexId {
+  font-size: 2.5em;
+  margin: 1em 0;
 }
 
 .board {
@@ -31,16 +27,54 @@ p {
   gap: 50px;
 }
 
+.display-flex {
+  display: flex;
+  justify-content: space-between;
+  gap: 5em;
+}
+
+/* ---------- ICONS ---------- */
+
+.icon {
+  color: #ff0000;
+  cursor: pointer;
+}
+
+.hearts {
+  margin: 3em 0;
+}
+
+.hidden-ability {
+  margin-left: 10px;
+}
+
+/* ---------- NAVBAR ---------- */
+
+.navbar {
+  background: red;
+
+  .navbar-brand {
+    font-size: 4em;
+    color: #fff;
+  }
+
+  .nav-link {
+    color: #fff;
+    font-size: 2em;
+  }
+}
+
 /* ---------- CARD ---------- */
 
 .card {
   border-radius: 15px;
-  border: solid 0.3rem #ff0000;
+  border: solid 0.3em #ff0000;
   cursor: pointer;
 
   .card-title {
     color: #ff0000;
-    font-size: 3rem;
+    font-size: 3em;
+    text-align: center;
   }
 
   .card-text {
@@ -48,7 +82,7 @@ p {
   }
 
   .card-image {
-    padding: 1.5rem;
+    padding: 1.5em;
     width: 350px;
     height: 350px;
   }
@@ -56,58 +90,39 @@ p {
 
 /* ---------- DETAILS PAGE ---------- */
 
-.display-flex {
-  display: flex;
-  justify-content: space-between;
-  gap: 5rem;
+.block {
+  display: block;
 }
 
-.title {
-  color: #ff0000;
-  font-size: 3rem;
-}
-
-.sub-title {
-  color: #ff0000;
-  font-size: 2.5rem;
-}
-
-.dexId {
-  color: #595959;
-  font-size: 3rem;
-}
-
-.stats-container {
-  width: 65%;
-
-  .stat-row {
-    align-items: center;
+.image-stats {
+  img {
+    width: 100%;
   }
-}
-
-.red-icon {
-  color: #ff0000;
-  cursor: pointer;
-}
-
-.hidden-ability {
-  vertical-align: baseline;
-  margin-left: 10px;
 }
 
 .details-card {
   width: 30%;
 }
 
-.stats-progress-bar {
-  height: 2rem;
-  border-radius: 20px;
+/* ---------- STATS ---------- */
+
+.stats-container {
+  .stats-progress-bar {
+    height: 2em;
+    border-radius: 20px;
+
+    .stat-row {
+      align-items: center;
+    }
+  }
 }
+
+/* ---------- PAGINATION ---------- */
 
 .pagination-container {
   display: flex;
   justify-content: center;
-  margin-top: 3rem;
+  margin-top: 3em;
 
   .page-item {
     .page-link {
@@ -117,22 +132,8 @@ p {
       &:hover {
         background-color: #ff0000;
         color: #fff;
-        border-color: #cc0000;
+        border-color: #ff0000;
       }
     }
-
-    /* &.active .page-link {
-      color: #fff;
-      background-color: #ff0000;
-      border-color: #ff0000;
-    }
-
-    &.disabled {
-      .page-link {
-        background-color: #f8f9fa;
-        color: #6c757d;
-        border-color: #dee2e6;
-      }
-    } */
   }
 }

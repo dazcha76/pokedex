@@ -27,7 +27,7 @@ export const InfoCard = ({ title, image, body, style }: CardProps) => {
       )}
       <Card.Body>
         <Card.Title className="card-title">{title}</Card.Title>
-        <Card.Text className="display-flex">{body}</Card.Text>
+        <Card.Text>{body}</Card.Text>
       </Card.Body>
     </Card>
   );

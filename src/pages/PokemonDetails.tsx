@@ -11,7 +11,7 @@ import type {
 } from '../types';
 import Image from 'react-bootstrap/Image';
 import { poke1, pokemonSpecies } from '../data';
-import { Stack } from 'react-bootstrap';
+import { Col, Container, Row, Stack } from 'react-bootstrap';
 import { InfoCard } from '../components/Card';
 
 export const PokemonDetails = () => {
@@ -33,26 +33,26 @@ export const PokemonDetails = () => {
 
   const size = (
     <>
-      <span>Height: {details?.height}</span>
-      <span>Weight: {details?.weight}</span>
+      <p>Height: {details?.height}</p>
+      <p>Weight: {details?.weight}</p>
     </>
   );
 
   const types = details?.types?.map((type: PokemonType) => (
-    <span key={type.type.name}>{type.type.name}</span>
+    <p key={type.type.name}>{type.type.name}</p>
   ));
 
   const abilities = details?.abilities?.map((ability: PokemonAbility) => (
-    <span key={ability.ability.name}>
+    <p key={ability.ability.name}>
       {ability.ability.name}
       {ability.is_hidden && (
         <FaLock
           title="Hidden Ability"
           size={20}
-          className="red-icon hidden-ability"
+          className="icon hidden-ability"
         />
       )}
-    </span>
+    </p>
   ));
 
   const toggleLike = () => {
@@ -104,54 +104,63 @@ export const PokemonDetails = () => {
   const isLiked = favorite.some((p) => p.name === details?.name);
 
   return (
-    <>
-      <header className="header">
-        <h1>Pokedex</h1>
-      </header>
-      <main className="main">
-        <Stack gap={5}>
-          <div className="display-flex">
-            <h1 className="dexId">#000{details?.id}</h1>
-            <h1 className="title">{details?.name}</h1>
-            <div className="red-icon" onClick={toggleLike}>
-              {isLiked ? (
-                <FaHeart title="Favorite" size={48} />
-              ) : (
-                <FaRegHeart title="Favorite" size={48} />
-              )}
-            </div>
-          </div>
+    <main>
+      <div className="display-flex">
+        <h1 className="dexId">#000{details?.id}</h1>
+        <h1 className="title">{details?.name}</h1>
+        <div className="icon hearts" onClick={toggleLike}>
+          {isLiked ? (
+            <FaHeart title="Favorite" size={48} />
+          ) : (
+            <FaRegHeart title="Favorite" size={48} />
+          )}
+        </div>
+      </div>
 
-          <div className="display-flex">
-            <Image
-              src={details?.sprites.other.dream_world.front_default}
-              alt={name}
-              rounded
-            />
-            <div className="stats-container">
-              <h1>{species?.flavor_text_entries[0].flavor_text}</h1>
-              <h1 className="sub-title">Stats</h1>
-              {details?.stats.map((stat, index) => (
-                <StatsProgressBar
-                  key={stat.stat.name}
-                  name={stat.stat.name}
-                  base={stat.base_stat}
-                  color={colors[index % colors.length]}
-                />
-              ))}
-            </div>
-          </div>
-          <div className="display-flex">
-            <InfoCard title="Size" body={size} style={{ width: '30%' }} />
-            <InfoCard title="Type" body={types} style={{ width: '30%' }} />
-            <InfoCard
-              title="Abilities"
-              body={abilities}
-              style={{ width: '30%' }}
-            />
-          </div>
-        </Stack>
-      </main>
-    </>
+      <Stack gap={5}>
+        <h2>{species?.flavor_text_entries[0].flavor_text}</h2>
+        <Container fluid>
+          <Row>
+            <Col xs={3}>
+              <Image
+                src={details?.sprites.other.dream_world.front_default}
+                alt={name}
+                rounded
+              />
+            </Col>
+            <Col>
+              <div>
+                <h1 className="sub-title">Size</h1>
+                {size}
+              </div>
+            </Col>
+            <Col>
+              <div>
+                <h1 className="sub-title">Type</h1>
+                {types}
+              </div>
+            </Col>
+            <Col>
+              <div>
+                <h1 className="sub-title">Abilities</h1>
+                {abilities}
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </Stack>
+
+      <div className="stats-container">
+        <h1 className="title">Stats</h1>
+        {details?.stats.map((stat, index) => (
+          <StatsProgressBar
+            key={stat.stat.name}
+            name={stat.stat.name}
+            base={stat.base_stat}
+            color={colors[index % colors.length]}
+          />
+        ))}
+      </div>
+    </main>
   );
 };
