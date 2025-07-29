@@ -17,6 +17,10 @@ import { InfoCard } from '../components/Card';
 export const PokemonDetails = () => {
   const [details, setDetails] = useState<PokemosDetails>();
   const [species, setSpecies] = useState<PokemonSpecies>();
+  const [favorite, setFavorite] = useState<{ name: string; image: string }[]>(
+    []
+  );
+
   const navigate = useNavigate();
   const { name } = useParams();
   const colors = [
@@ -27,10 +31,6 @@ export const PokemonDetails = () => {
     'warning',
     'info',
   ];
-
-  const handleClick = () => {
-    navigate('/');
-  };
 
   const size = (
     <>
@@ -56,6 +56,27 @@ export const PokemonDetails = () => {
     </span>
   ));
 
+  const handleClick = () => {
+    navigate('/');
+  };
+
+  const toggleLike = () => {
+    if (!details) return;
+    const isLiked = favorite.some((p) => p.name === details.name);
+
+    if (isLiked) {
+      setFavorite((prev) => prev.filter((p) => p.name !== details.name));
+    } else {
+      setFavorite((prev) => [
+        ...prev,
+        {
+          name: details.name,
+          image: details.sprites.other.dream_world.front_default,
+        },
+      ]);
+    }
+  };
+
   useEffect(() => {
     const getPokemonInfo = async () => {
       try {
@@ -74,6 +95,19 @@ export const PokemonDetails = () => {
     getPokemonInfo();
   }, [name]);
 
+  useEffect(() => {
+    const saved = localStorage.getItem('favorites');
+    if (saved) {
+      setFavorite(JSON.parse(saved));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorite));
+  }, [favorite]);
+
+  const isLiked = favorite.some((p) => p.name === details?.name);
+
   return (
     <>
       <header className="header">
@@ -84,9 +118,12 @@ export const PokemonDetails = () => {
           <div className="display-flex">
             <h1 className="dexId">#000{details?.id}</h1>
             <h1 className="title">{details?.name}</h1>
-            <div className="red-icon">
-              <FaRegHeart title="Favorite" size={48} />
-              <FaHeart title="Favorite" size={48} />
+            <div className="red-icon" onClick={toggleLike}>
+              {isLiked ? (
+                <FaHeart title="Favorite" size={48} />
+              ) : (
+                <FaRegHeart title="Favorite" size={48} />
+              )}
             </div>
           </div>
 

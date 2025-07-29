@@ -103,3 +103,36 @@ p {
   height: 2rem;
   border-radius: 20px;
 }
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+
+  .page-item {
+    .page-link {
+      color: #ff0000;
+      border-color: #ff0000;
+
+      &:hover {
+        background-color: #ff0000;
+        color: #fff;
+        border-color: #cc0000;
+      }
+    }
+
+    /* &.active .page-link {
+      color: #fff;
+      background-color: #ff0000;
+      border-color: #ff0000;
+    }
+
+    &.disabled {
+      .page-link {
+        background-color: #f8f9fa;
+        color: #6c757d;
+        border-color: #dee2e6;
+      }
+    } */
+  }
+}

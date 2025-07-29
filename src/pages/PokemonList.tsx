@@ -38,8 +38,10 @@ export const PokemonList = () => {
   useEffect(() => {
     const getPokemonList = async () => {
       try {
+        // // get pokemon list with names
         // const response = await getAllPokemons(url);
         // setPokemonResponse(response);
+        // // get each pokemon's image
         // const pokemons = await Promise.all(
         //   response.results.map((pokemon) => getPokemonDetails(pokemon.name))
         // );
