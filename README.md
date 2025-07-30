@@ -3,6 +3,9 @@
 ## Description
 An interactive Pokédex dashboard that lets you explore all available Pokémon. Browse through the full list and click on any Pokémon to view detailed information. You can also mark your favorite Pokémon and view them all in a dedicated Favorites page.
 
+## Live Site
+Check out the live version here: [https://pokemon-pokidex.netlify.app](https://pokemon-pokidex.netlify.app)
+
 ## Technologies
 - React v. 19 via Vite
 - Axios
