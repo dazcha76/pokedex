@@ -4,7 +4,7 @@ export const CardSkeleton = () => {
   return (
     <Card className="card-skeleton">
       <Placeholder animation="glow">
-        <Placeholder xs={12} style={{ height: '450px' }} />
+        <Placeholder xs={12} style={{ height: '331px' }} />
       </Placeholder>
     </Card>
   );
