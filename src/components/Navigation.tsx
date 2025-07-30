@@ -7,7 +7,9 @@ export const NavBar = () => {
   return (
     <Navbar expand="lg">
       <Container className="navigation-container">
-        <Navbar.Brand>Pokemon</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          Pokemon
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

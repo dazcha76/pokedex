@@ -8,6 +8,7 @@ export const FavoritePokemons = () => {
   );
 
   useEffect(() => {
+    // Get favorite Pokémons from localstorage
     const favorites = localStorage.getItem('favorites');
     if (favorites) {
       try {

@@ -15,12 +15,15 @@ export const PokemonList = () => {
     let newUrl = '';
 
     if (page !== 'previous' && page !== 'next') {
+      // Build Pokémon info url based on page # selected
       newUrl = `https://pokeapi.co/api/v2/pokemon?offset=${
         +page * 20 - 20
       }&limit=20`;
     } else if (page === 'previous' && pokemonResponse?.previous) {
+      // Use 'previous' url provided in initial API call
       newUrl = pokemonResponse.previous;
     } else if (page === 'next' && pokemonResponse?.next) {
+      // Use 'next' url provided in initial API call
       newUrl = pokemonResponse.next;
     }
 
@@ -31,12 +34,13 @@ export const PokemonList = () => {
 
   useEffect(() => {
     const getPokemonList = async () => {
+      // Show skeleton while data is retrieved
       setIsLoading(true);
       try {
-        // get list of pokemons
+        // Get list of Pokémons
         const response = await getAllPokemons(url);
         setPokemonResponse(response);
-        // call the endpoint returned for eack pokemon to get image
+        // Call the endpoint returned above for each Pokémon to get image
         const pokemons = await Promise.all(
           response.results.map((pokemon) => getPokemonDetails(pokemon.name))
         );
@@ -44,6 +48,7 @@ export const PokemonList = () => {
       } catch (error) {
         console.error(error);
       } finally {
+        // Remove skeleton and display Pokémons
         setIsLoading(false);
       }
     };

@@ -30,6 +30,7 @@ export const PokemonDetails = () => {
     'info',
   ];
 
+  // Search for the first description in English
   const flavorText =
     species?.flavor_text_entries.find((entry) => entry.language.name === 'en')
       ?.flavor_text || '';
@@ -41,10 +42,12 @@ export const PokemonDetails = () => {
     </>
   );
 
+  // Extract individual values from 'Types'
   const types = details?.types?.map((type: PokemonType) => (
     <p key={type.type.name}>{sentenceCase(type.type.name)}</p>
   ));
 
+  // Extract individual values from 'Abilities'
   const abilities = details?.abilities?.map((ability: PokemonAbility) => (
     <p key={ability.ability.name}>
       {sentenceCase(ability.ability.name)}
@@ -58,13 +61,18 @@ export const PokemonDetails = () => {
     </p>
   ));
 
-  const toggleLike = () => {
+  const toggleFavorite = () => {
     if (!details) return;
-    const isLiked = favorite.some((p) => p.name === details.name);
+    // Checks if a Pokémon is already in the favorites array
+    const isLiked = favorite.some((pokemon) => pokemon.name === details.name);
 
     if (isLiked) {
-      setFavorite((prev) => prev.filter((p) => p.name !== details.name));
+      // If it is, remove it
+      setFavorite((prev) =>
+        prev.filter((pokemon) => pokemon.name !== details.name)
+      );
     } else {
+      // If it isn't, keep all previous favorites and add the new one
       setFavorite((prev) => [
         ...prev,
         {
@@ -79,8 +87,10 @@ export const PokemonDetails = () => {
     const getPokemonInfo = async () => {
       try {
         if (!name) return;
+        // Get most Pokémon details
         const detailsResponse = await getPokemonDetails(name);
         setDetails(detailsResponse);
+        // Get the Pokémon's description
         const speciesResponse = await getSpeciesInfo(name);
         setSpecies(speciesResponse);
       } catch (error) {
@@ -92,6 +102,7 @@ export const PokemonDetails = () => {
   }, [name]);
 
   useEffect(() => {
+    // Retrieve favorite Pokémons from localstorage
     const saved = localStorage.getItem('favorites');
     if (saved) {
       setFavorite(JSON.parse(saved));
@@ -99,17 +110,18 @@ export const PokemonDetails = () => {
   }, []);
 
   useEffect(() => {
+    // Save favorite Pokémon to localstorage
     localStorage.setItem('favorites', JSON.stringify(favorite));
   }, [favorite]);
 
-  const isLiked = favorite.some((p) => p.name === details?.name);
+  const isLiked = favorite.some((pokemon) => pokemon.name === details?.name);
 
   return (
     <main>
       <div className="details-page padding display-flex">
         <h1 className="dexId">#{details?.id.toString().padStart(4, '0')}</h1>
         <h1 className="details-title">{sentenceCase(details?.name)}</h1>
-        <div className="icon hearts" onClick={toggleLike}>
+        <div className="icon hearts" onClick={toggleFavorite}>
           {isLiked ? (
             <FaHeart title="Favorite" size={30} />
           ) : (
