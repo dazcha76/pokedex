@@ -21,8 +21,3 @@ export const getSpeciesInfo = async (name: string): Promise<PokemonSpecies> => {
   );
   return data;
 };
-
-export const getEvolutionInfo = async (url: string) => {
-  const { data } = await axios.get(url);
-  return data;
-};

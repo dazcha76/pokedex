@@ -10,8 +10,8 @@ export const StatsProgressBar = ({ name, base, color }: ProgressBarProps) => {
   return (
     <Container fluid>
       <Row className="stat-row">
-        <Col xs={3}>
-          <h3>{name}</h3>
+        <Col xs={12} md={3}>
+          <h2>{name}</h2>
         </Col>
         <Col>
           <ProgressBar

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { StatsProgressBar } from '../components/ProgressBar';
 import { FaHeart, FaLock, FaRegHeart } from 'react-icons/fa';
-// import { getPokemonDetails, getSpeciesInfo } from '../api';
+import { getPokemonDetails, getSpeciesInfo } from '../api';
 import type {
   PokemonAbility,
   PokemonSpecies,
@@ -10,9 +10,8 @@ import type {
   PokemosDetails,
 } from '../types';
 import Image from 'react-bootstrap/Image';
-import { poke1, pokemonSpecies } from '../data';
 import { Col, Container, Row, Stack } from 'react-bootstrap';
-import { InfoCard } from '../components/Card';
+import { useSentenceCase } from '../hooks/useSentenceCase';
 
 export const PokemonDetails = () => {
   const [details, setDetails] = useState<PokemosDetails>();
@@ -20,8 +19,8 @@ export const PokemonDetails = () => {
   const [favorite, setFavorite] = useState<{ name: string; image: string }[]>(
     []
   );
-
   const { name } = useParams();
+  const sentenceCase = useSentenceCase();
   const colors = [
     'primary',
     'secondary',
@@ -31,6 +30,10 @@ export const PokemonDetails = () => {
     'info',
   ];
 
+  const flavorText =
+    species?.flavor_text_entries.find((entry) => entry.language.name === 'en')
+      ?.flavor_text || '';
+
   const size = (
     <>
       <p>Height: {details?.height}</p>
@@ -39,12 +42,12 @@ export const PokemonDetails = () => {
   );
 
   const types = details?.types?.map((type: PokemonType) => (
-    <p key={type.type.name}>{type.type.name}</p>
+    <p key={type.type.name}>{sentenceCase(type.type.name)}</p>
   ));
 
   const abilities = details?.abilities?.map((ability: PokemonAbility) => (
     <p key={ability.ability.name}>
-      {ability.ability.name}
+      {sentenceCase(ability.ability.name)}
       {ability.is_hidden && (
         <FaLock
           title="Hidden Ability"
@@ -76,14 +79,12 @@ export const PokemonDetails = () => {
     const getPokemonInfo = async () => {
       try {
         if (!name) return;
-        // const detailsResponse = await getPokemonDetails(name);
-        // setDetails(detailsResponse);
-        // const speciesResponse = await getSpeciesInfo(name);
-        // setSpecies(speciesResponse);
-        setDetails(poke1);
-        setSpecies(pokemonSpecies);
+        const detailsResponse = await getPokemonDetails(name);
+        setDetails(detailsResponse);
+        const speciesResponse = await getSpeciesInfo(name);
+        setSpecies(speciesResponse);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
 
@@ -105,9 +106,9 @@ export const PokemonDetails = () => {
 
   return (
     <main>
-      <div className="display-flex">
-        <h1 className="dexId">#000{details?.id}</h1>
-        <h1 className="title">{details?.name}</h1>
+      <div className="details-page display-flex">
+        <h1 className="dexId">#{details?.id.toString().padStart(4, '0')}</h1>
+        <h1 className="details-title">{sentenceCase(details?.name)}</h1>
         <div className="icon hearts" onClick={toggleLike}>
           {isLiked ? (
             <FaHeart title="Favorite" size={48} />
@@ -118,29 +119,30 @@ export const PokemonDetails = () => {
       </div>
 
       <Stack gap={5}>
-        <h2>{species?.flavor_text_entries[0].flavor_text}</h2>
+        <h2 className="description">{flavorText}</h2>
         <Container fluid>
           <Row>
-            <Col xs={3}>
+            <Col xs={12} md={3} className="image-column">
               <Image
                 src={details?.sprites.other.dream_world.front_default}
                 alt={name}
                 rounded
+                fluid
               />
             </Col>
-            <Col>
+            <Col xs={12} md={3}>
               <div>
                 <h1 className="sub-title">Size</h1>
                 {size}
               </div>
             </Col>
-            <Col>
+            <Col xs={12} md={3}>
               <div>
                 <h1 className="sub-title">Type</h1>
                 {types}
               </div>
             </Col>
-            <Col>
+            <Col xs={12} md={3}>
               <div>
                 <h1 className="sub-title">Abilities</h1>
                 {abilities}
@@ -151,7 +153,7 @@ export const PokemonDetails = () => {
       </Stack>
 
       <div className="stats-container">
-        <h1 className="title">Stats</h1>
+        <h1 className="stats-title">Stats</h1>
         {details?.stats.map((stat, index) => (
           <StatsProgressBar
             key={stat.stat.name}

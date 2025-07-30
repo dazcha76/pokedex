@@ -44,6 +44,11 @@ export type PokemonSpecies = {
 
 export type FlavorTextEntry = {
   flavor_text: string;
+  language: Language;
+};
+
+type Language = {
+  name: string;
 };
 
 // ------ Sprites ------ //

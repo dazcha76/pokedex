@@ -12,7 +12,7 @@ export const PaginationComponent = ({ onPageChange }: PaginationProps) => {
         <Pagination.Item onClick={() => onPageChange('1')}>{1}</Pagination.Item>
         <Pagination.Item onClick={() => onPageChange('2')}>{2}</Pagination.Item>
         <Pagination.Item onClick={() => onPageChange('3')}>{3}</Pagination.Item>
-        <Pagination.Ellipsis />
+        <Pagination.Item onClick={() => onPageChange('4')}>{4}</Pagination.Item>
         <Pagination.Next onClick={() => onPageChange('next')} />
       </Pagination>
     </div>

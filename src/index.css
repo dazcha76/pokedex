@@ -6,7 +6,9 @@ p {
   font-size: 2em;
 }
 
-.title {
+.title,
+.details-title,
+.stats-title {
   color: #ff0000;
   font-size: 3em;
   margin: 1em 0;
@@ -14,17 +16,20 @@ p {
 
 .sub-title {
   color: #ff0000;
+  margin-bottom: 30px;
 }
 
 .dexId {
   font-size: 2.5em;
   margin: 1em 0;
+  line-height: 2em;
 }
 
 .board {
   display: flex;
   flex-wrap: wrap;
   gap: 50px;
+  justify-content: center;
 }
 
 .display-flex {
@@ -68,8 +73,12 @@ p {
 
 .card {
   border-radius: 15px;
-  border: solid 0.3em #ff0000;
+  border: solid 0.3rem #ff0000;
   cursor: pointer;
+  flex: 1 1 300px;
+  max-width: 350px;
+  min-width: 250px;
+  box-sizing: border-box;
 
   .card-title {
     color: #ff0000;
@@ -83,9 +92,14 @@ p {
 
   .card-image {
     padding: 1.5em;
-    width: 350px;
+    width: 100%;
     height: 350px;
   }
+}
+
+.card-skeleton {
+  border: none;
+  border-radius: 15px;
 }
 
 /* ---------- DETAILS PAGE ---------- */
@@ -135,5 +149,104 @@ p {
         border-color: #ff0000;
       }
     }
+  }
+}
+
+/* ---------- MEDIA QUERIES ---------- */
+
+@media (max-width: 480px) {
+  .sub-title {
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1.5em;
+  }
+
+  .dexId {
+    font-size: 1.8em;
+  }
+
+  .image-column {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .description {
+    padding: 0 12px;
+  }
+
+  .details-page {
+    padding: 0 12px;
+
+    .details-title {
+      font-size: 1.9em;
+      text-align: left;
+      padding: 0 12px;
+    }
+  }
+
+  .stats-title {
+    font-size: 1.9em;
+    padding: 0 12px;
+    margin-top: 0.3em;
+  }
+
+  .stats-container {
+    margin-bottom: 30px;
+
+    .stat-row {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .display-flex {
+    align-items: center;
+    gap: 1em;
+    text-align: center;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .dexId {
+    font-size: 1.5em;
+    margin: 0;
+  }
+
+  .hearts {
+    margin: 1em 0;
+    margin: 0;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .board {
+    gap: 20px;
+    padding: 0 10px;
+    margin-bottom: 2em;
+  }
+
+  .card-image {
+    width: 100%;
+    height: auto;
+    padding: 1em;
+  }
+
+  .navbar-brand {
+    font-size: 2em;
+  }
+
+  .nav-link {
+    font-size: 1.5em;
   }
 }

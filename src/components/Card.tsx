@@ -1,22 +1,22 @@
 import { useNavigate } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
+import { useSentenceCase } from '../hooks/useSentenceCase';
 
 type CardProps = {
-  title?: string;
-  image?: string;
-  body?: React.ReactNode;
-  style?: React.CSSProperties;
+  title: string;
+  image: string;
 };
 
-export const InfoCard = ({ title, image, body, style }: CardProps) => {
+export const InfoCard = ({ title, image }: CardProps) => {
   const navigate = useNavigate();
+  const sentenceCase = useSentenceCase();
 
   const handleCardClick = () => {
     navigate(`/${title}`);
   };
 
   return (
-    <Card className="card" style={style} onClick={handleCardClick}>
+    <Card className="card" onClick={handleCardClick}>
       {image && (
         <Card.Img
           className="card-image"
@@ -26,8 +26,7 @@ export const InfoCard = ({ title, image, body, style }: CardProps) => {
         />
       )}
       <Card.Body>
-        <Card.Title className="card-title">{title}</Card.Title>
-        <Card.Text>{body}</Card.Text>
+        <Card.Title className="card-title">{sentenceCase(title)}</Card.Title>
       </Card.Body>
     </Card>
   );

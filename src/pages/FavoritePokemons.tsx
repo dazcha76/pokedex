@@ -12,8 +12,8 @@ export const FavoritePokemons = () => {
     if (favorites) {
       try {
         setFavoritePokemons(JSON.parse(favorites));
-      } catch (e) {
-        console.error('Invalid favorites JSON in localStorage:', e);
+      } catch (error) {
+        console.error(error);
         setFavoritePokemons([]);
       }
     }

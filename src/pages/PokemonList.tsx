@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { InfoCard } from '../components/Card';
 import type { PokemonResponse, PokemosDetails } from '../types';
 import { PaginationComponent } from '../components/Pagination';
-// import { getAllPokemons, getPokemonDetails } from '../api';
-import { dummyPokemonResponse, dummyPokemonList } from '../data';
-import { NavBar } from '../components/Navigation';
+import { getAllPokemons, getPokemonDetails } from '../api';
+import { CardSkeleton } from '../components/CardSkeleton';
 
 export const PokemonList = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon');
   const [pokemonResponse, setPokemonResponse] = useState<PokemonResponse>();
   const [pokemonDetails, setPokemonDetails] = useState<PokemosDetails[]>([]);
@@ -31,19 +31,20 @@ export const PokemonList = () => {
 
   useEffect(() => {
     const getPokemonList = async () => {
+      setIsLoading(true);
       try {
-        // // get pokemon list with names
-        // const response = await getAllPokemons(url);
-        // setPokemonResponse(response);
-        // // get each pokemon's image
-        // const pokemons = await Promise.all(
-        //   response.results.map((pokemon) => getPokemonDetails(pokemon.name))
-        // );
-        // setPokemonDetails(pokemons);
-        setPokemonResponse(dummyPokemonResponse);
-        setPokemonDetails(dummyPokemonList);
+        // get list of pokemons
+        const response = await getAllPokemons(url);
+        setPokemonResponse(response);
+        // call the endpoint returned for eack pokemon to get image
+        const pokemons = await Promise.all(
+          response.results.map((pokemon) => getPokemonDetails(pokemon.name))
+        );
+        setPokemonDetails(pokemons);
       } catch (error) {
-        console.log(error);
+        console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -54,13 +55,17 @@ export const PokemonList = () => {
     <main>
       <h1 className="title">Pokedex</h1>
       <div className="board">
-        {pokemonDetails?.map((pokemon: PokemosDetails) => (
-          <InfoCard
-            key={pokemon.name}
-            title={pokemon.name}
-            image={pokemon.sprites.other.dream_world.front_default}
-          />
-        ))}
+        {isLoading &&
+          [...Array(20)].map((_, index) => <CardSkeleton key={index} />)}
+
+        {!isLoading &&
+          pokemonDetails?.map((pokemon: PokemosDetails) => (
+            <InfoCard
+              key={pokemon.name}
+              title={pokemon.name}
+              image={pokemon.sprites.other.dream_world.front_default}
+            />
+          ))}
       </div>
       <PaginationComponent onPageChange={handlePageChange} />
     </main>
