@@ -106,20 +106,20 @@ export const PokemonDetails = () => {
 
   return (
     <main>
-      <div className="details-page display-flex">
+      <div className="details-page padding display-flex">
         <h1 className="dexId">#{details?.id.toString().padStart(4, '0')}</h1>
         <h1 className="details-title">{sentenceCase(details?.name)}</h1>
         <div className="icon hearts" onClick={toggleLike}>
           {isLiked ? (
-            <FaHeart title="Favorite" size={48} />
+            <FaHeart title="Favorite" size={30} />
           ) : (
-            <FaRegHeart title="Favorite" size={48} />
+            <FaRegHeart title="Favorite" size={30} />
           )}
         </div>
       </div>
 
       <Stack gap={5}>
-        <h2 className="description">{flavorText}</h2>
+        <p className="padding">{flavorText}</p>
         <Container fluid>
           <Row>
             <Col xs={12} md={3} className="image-column">
@@ -131,38 +131,37 @@ export const PokemonDetails = () => {
               />
             </Col>
             <Col xs={12} md={3}>
-              <div>
+              <div className="detail-container">
                 <h1 className="sub-title">Size</h1>
                 {size}
               </div>
             </Col>
             <Col xs={12} md={3}>
-              <div>
+              <div className="detail-container">
                 <h1 className="sub-title">Type</h1>
                 {types}
               </div>
             </Col>
             <Col xs={12} md={3}>
-              <div>
+              <div className="detail-container">
                 <h1 className="sub-title">Abilities</h1>
                 {abilities}
               </div>
             </Col>
           </Row>
         </Container>
+        <div>
+          <h1 className="sub-title padding">Stats</h1>
+          {details?.stats.map((stat, index) => (
+            <StatsProgressBar
+              key={stat.stat.name}
+              name={stat.stat.name}
+              base={stat.base_stat}
+              color={colors[index % colors.length]}
+            />
+          ))}
+        </div>
       </Stack>
-
-      <div className="stats-container">
-        <h1 className="stats-title">Stats</h1>
-        {details?.stats.map((stat, index) => (
-          <StatsProgressBar
-            key={stat.stat.name}
-            name={stat.stat.name}
-            base={stat.base_stat}
-            color={colors[index % colors.length]}
-          />
-        ))}
-      </div>
     </main>
   );
 };

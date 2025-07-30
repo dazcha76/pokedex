@@ -2,27 +2,31 @@ body {
   color: #595959;
 }
 
+main {
+  margin: 3em 0;
+}
+
 p {
-  font-size: 2em;
+  font-size: 1.2em;
+  margin: 0;
 }
 
 .title,
 .details-title,
 .stats-title {
   color: #ff0000;
-  font-size: 3em;
-  margin: 1em 0;
+  font-size: 1.7em;
+  margin: 0;
 }
 
 .sub-title {
   color: #ff0000;
-  margin-bottom: 30px;
+  font-size: 1.6em;
+  margin: 0;
 }
 
 .dexId {
-  font-size: 2.5em;
-  margin: 1em 0;
-  line-height: 2em;
+  font-size: 1.5em;
 }
 
 .board {
@@ -30,6 +34,7 @@ p {
   flex-wrap: wrap;
   gap: 50px;
   justify-content: center;
+  margin: 3em 0;
 }
 
 .display-flex {
@@ -38,15 +43,15 @@ p {
   gap: 5em;
 }
 
+.padding {
+  padding: 0 12px;
+}
+
 /* ---------- ICONS ---------- */
 
 .icon {
   color: #ff0000;
   cursor: pointer;
-}
-
-.hearts {
-  margin: 3em 0;
 }
 
 .hidden-ability {
@@ -59,13 +64,13 @@ p {
   background: red;
 
   .navbar-brand {
-    font-size: 4em;
+    font-size: 1.7em;
     color: #fff;
   }
 
   .nav-link {
     color: #fff;
-    font-size: 2em;
+    font-size: 1.2em;
   }
 }
 
@@ -75,14 +80,12 @@ p {
   border-radius: 15px;
   border: solid 0.3rem #ff0000;
   cursor: pointer;
-  flex: 1 1 300px;
-  max-width: 350px;
-  min-width: 250px;
+  width: 250px;
   box-sizing: border-box;
 
   .card-title {
     color: #ff0000;
-    font-size: 3em;
+    font-size: 1.7em;
     text-align: center;
   }
 
@@ -93,7 +96,7 @@ p {
   .card-image {
     padding: 1.5em;
     width: 100%;
-    height: 350px;
+    height: 250px;
   }
 }
 
@@ -104,14 +107,17 @@ p {
 
 /* ---------- DETAILS PAGE ---------- */
 
-.block {
-  display: block;
+.details-page {
+  margin: 3em 0 1em;
+  align-items: center;
 }
 
-.image-stats {
-  img {
-    width: 100%;
-  }
+.detail-container {
+  margin: 15px 0;
+}
+
+img {
+  width: 250px;
 }
 
 .details-card {
@@ -120,15 +126,12 @@ p {
 
 /* ---------- STATS ---------- */
 
-.stats-container {
-  .stats-progress-bar {
-    height: 2em;
-    border-radius: 20px;
+.stats-progress-bar {
+  border-radius: 20px;
+}
 
-    .stat-row {
-      align-items: center;
-    }
-  }
+.stat-row {
+  align-items: center;
 }
 
 /* ---------- PAGINATION ---------- */
@@ -155,10 +158,6 @@ p {
 /* ---------- MEDIA QUERIES ---------- */
 
 @media (max-width: 480px) {
-  .sub-title {
-    margin-bottom: 20px;
-  }
-
   p {
     font-size: 1.5em;
   }
@@ -172,23 +171,13 @@ p {
     margin-bottom: 30px;
   }
 
-  .description {
-    padding: 0 12px;
-  }
-
-  .details-page {
-    padding: 0 12px;
-
-    .details-title {
-      font-size: 1.9em;
-      text-align: left;
-      padding: 0 12px;
-    }
+  .details-title {
+    font-size: 1.9em;
+    text-align: left;
   }
 
   .stats-title {
     font-size: 1.9em;
-    padding: 0 12px;
     margin-top: 0.3em;
   }
 
